@@ -109,5 +109,8 @@ export default {
   approximateColor,
   refine,
   colorDistance,
-  getColorFamily
+  getColorFamily,
+  getRed,
+  getGreen,
+  getBlue
 }

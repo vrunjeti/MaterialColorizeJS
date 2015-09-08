@@ -23,4 +23,28 @@ describe('Material Colorize', function() {
       expect(mc.approximateColor('00838A', true)).to.equal('00838F');
     });
   });
+  describe('#getRed', function(){
+    it('should return 0xF1 when given F1A34B', function() {
+      expect(mc.getRed(0xF1A34B)).to.equal(0xF1);
+    });
+    it('should return 0x12 when given 123121', function() {
+      expect(mc.getRed(0x123121)).to.equal(0x12);
+    });
+  });
+  describe('#getGreen', function(){
+    it('should return 0xA3 when given F1A34B', function() {
+      expect(mc.getGreen(0xF1A34B)).to.equal(0xA3);
+    });
+    it('should return 0x31 when given 123121', function() {
+      expect(mc.getGreen(0x123121)).to.equal(0x31);
+    });
+  });
+  describe('#getBlue', function(){
+    it('should return 0x4B when given F1A34B', function() {
+      expect(mc.getBlue(0xF1A34B)).to.equal(0x4B);
+    });
+    it('should return 0x21 when given 123121', function() {
+      expect(mc.getBlue(0x123121)).to.equal(0x21);
+    });
+  });
 });
