@@ -2,8 +2,10 @@
   "name": "materialcolorize",
   "version": "1.0.0",
   "description": "",
-  "main": "gulpfile.js",
+  "main": "lib/index.js",
   "scripts": {
+    "build": "babel -d lib/ src/",
+    "prepublish": "npm run build",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",
