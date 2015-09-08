@@ -3,39 +3,20 @@ import { palettes, fullPalette } from './palettes';
 /**
  * Calculates closest material color based on input color
  * @param  {String}  color [the hex value of the color to be materialized]
- * @param  {Boolean} ref   [set true to return the most accurate material color, set false to return a default 500 value]
  * @return {String}        [the hex value of the closest calculated color]
  */
-let approximateColor = (color, ref) => {
+let approximateColor = (color) => {
   color = hexstrToNum(color);
-  let ans = 0, curDistance, bestDistance = Infinity, bestIndex = 0;
-  for(let i = 0; i < palettes.mainPalette.length; i++) {
-    curDistance = colorDistance(color, palettes.mainPalette[i]);
-    if(curDistance < bestDistance){
-      bestDistance = curDistance;
-      ans = palettes.mainPalette[i];
-      bestIndex = i;
-    }
-  }
-  if(!ref) return ans;
-  else return refine(color, bestIndex);
-}
-
-/**
- * Refines the color approximation by looking through an identified 500 value's family
- * @param  {String} color      [the hex value of the color to be materialized]
- * @param  {Int}    identifier [the index for fullPalette, identifies the color family based on 500 value]
- * @return {String}            [the hex value of the closest calculated color]
- */
-let refine = (color, identifier) => {
-  color = hexstrToNum(color);
-  let ans = 0, curDistance, bestDistance = Infinity;
-  let palette = fullPalette[identifier];
-  for(let i = 0; i < palette.length; i++) {
-    curDistance = colorDistance(color, palette[i]);
-    if(curDistance < bestDistance){
-      bestDistance = curDistance;
-      ans = palette[i];
+  let ans = 0,
+      curDistance,
+      bestDistance = Infinity;
+  for(let i = 0; i < fullPalette.length; i++) {
+    for(let j = 0; j < fullPalette[i].length; j++) {
+      curDistance = colorDistance(color, fullPalette[i][j]);
+      if(curDistance < bestDistance) {
+        bestDistance = curDistance;
+        ans = fullPalette[i][j];
+      }
     }
   }
   return ans;
@@ -71,16 +52,16 @@ let colorDistance = (c1, c2) => {
  * @return {Array}        [the full material color family palette of the input color]
  */
 let getColorFamily = (color) => {
-  color = hexstrToNum(color);
-  let curDistance, bestDistance = Infinity, bestIndex = 0;
-  for(let i = 0; i < palettes.mainPalette.length; i++){
-    curDistance = colorDistance(color, palettes.mainPalette[i]);
-    if(curDistance < bestDistance){
-      bestDistance = curDistance;
-      bestIndex = i;
+  let match = approximateColor(color);
+  let correctIndex;
+  for(let i = 0; i < fullPalette.length; i++) {
+    for(int j = 0; j < fullPalette[i].length; j++) {
+      if(match === fullPalette[i][j]) {
+        correctIndex = i;
+      }
     }
   }
-  return fullPalette[bestIndex];
+  return fullPalette[correctIndex];
 }
 
 let getRed = (color) => {
@@ -107,7 +88,6 @@ let hexstrToNum = (input) => {
 
 export default {
   approximateColor,
-  refine,
   colorDistance,
   getColorFamily,
   getRed,
