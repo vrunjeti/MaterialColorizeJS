@@ -55,7 +55,7 @@ let getColorFamily = (color) => {
   let match = approximateColor(color);
   let correctIndex;
   for(let i = 0; i < fullPalette.length; i++) {
-    for(int j = 0; j < fullPalette[i].length; j++) {
+    for(let j = 0; j < fullPalette[i].length; j++) {
       if(match === fullPalette[i][j]) {
         correctIndex = i;
       }
