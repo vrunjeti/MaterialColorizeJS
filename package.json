@@ -1,8 +1,12 @@
 {
   "name": "materialcolorize",
-  "version": "1.1.0",
+  "version": "1.1.1",
   "description": "A library to find the closest colors on the Google material design color palette",
-  "keywords": ["color", "material design", "material"],
+  "keywords": [
+    "color",
+    "material design",
+    "material"
+  ],
   "main": "lib/index.js",
   "repository": {
     "type": "git",
@@ -23,6 +27,5 @@
     "vinyl-source-stream": "^1.1.0",
     "chai": "^3.2.0"
   },
-  "dependencies": {
-  }
+  "dependencies": {}
 }
