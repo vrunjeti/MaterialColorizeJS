@@ -1,4 +1,4 @@
-import { palettes, fullPalette, JSONPalette } from './palettes';
+import { Palettes } from './palettes';
 
 /**
  * Calculates closest material color based on input color
@@ -7,19 +7,48 @@ import { palettes, fullPalette, JSONPalette } from './palettes';
  */
 let approximateColor = (color) => {
   color = hexstrToNum(color);
-  let ans = 0,
-      curDistance,
+  if(color === 0xFFFFFF) return "FFFFFF";
+  if(color === 0x000000) return "000000";
+  let result = 0,
+      currDistance,
       bestDistance = Infinity;
-  for(let i = 0; i < fullPalette.length; i++) {
-    for(let j = 0; j < fullPalette[i].length; j++) {
-      curDistance = colorDistance(color, fullPalette[i][j]);
-      if(curDistance < bestDistance) {
-        bestDistance = curDistance;
-        ans = fullPalette[i][j];
+  Object.keys(Palettes).forEach(palette => {
+    Object.keys(Palettes[palette]).forEach(materialColorWeight => {
+      let currMaterialColor = Palettes[palette][materialColorWeight];
+      currDistance = colorDistance(color, currMaterialColor);
+      if(currDistance < bestDistance) {
+        bestDistance = currDistance;
+        result = currMaterialColor;
       }
+    });
+  });
+  return result;
+}
+
+/**
+ * Returns the full material color family palette of the input color
+ * @param  {String} color [the hex value of the color to find the family palette of]
+ * @return {Object}       [the full material color family palette of the input color]
+ */
+let getColorFamily = (color) => {
+  let match = approximateColor(color);
+  // Black and White aren't in a palette (per se) but are coupled together
+  if(match === '000000' || match === 'FFFFFF') {
+    return {
+      'Black': '000000',
+      'White': 'FFFFFF'
     }
   }
-  return ans;
+  let result;
+  Object.keys(Palettes).forEach(palette => {
+    Object.keys(Palettes[palette]).forEach(materialColorWeight => {
+      let currMaterialColor = Palettes[palette][materialColorWeight];
+      if(match === currMaterialColor) {
+        result = Palettes[palette];
+      }
+    });
+  });
+  return result;
 }
 
 /**
@@ -41,25 +70,7 @@ let colorDistance = (c1, c2) => {
   let r = red1 - red2;
   let g = getGreen(c1) - getGreen(c2);
   let b = getBlue(c1) - getBlue(c2);
-
-  let ans = Math.sqrt((((512+rMean)*r*r)>>8) + 4*g*g + (((767-rMean)*b*b)>>8));
-  return ans;
-}
-
-/**
- * Returns the full material color family palette of the input color
- * @param  {String} color [the hex value of the color to find the family palette of]
- * @return {Array}        [the full material color family palette of the input color]
- */
-let getColorFamily = (color) => {
-  let match = approximateColor(color);
-  for(let i = 0; i < fullPalette.length; i++) {
-    for(let j = 0; j < fullPalette[i].length; j++) {
-      if(match === fullPalette[i][j]) {
-        return JSONPalette[Object.keys(JSONPalette)[i]];
-      }
-    }
-  }
+  return Math.sqrt((((512+rMean)*r*r)>>8) + 4*g*g + (((767-rMean)*b*b)>>8));
 }
 
 /**
@@ -89,6 +100,6 @@ let hexstrToNum = (input) => {
 
 export default {
   approximateColor,
-  colorDistance,
-  getColorFamily
+  getColorFamily,
+  colorDistance
 }
