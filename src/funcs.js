@@ -1,4 +1,4 @@
-import { palettes, fullPalette } from './palettes';
+import { palettes, fullPalette, JSONPalette } from './palettes';
 
 /**
  * Calculates closest material color based on input color
@@ -53,17 +53,18 @@ let colorDistance = (c1, c2) => {
  */
 let getColorFamily = (color) => {
   let match = approximateColor(color);
-  let correctIndex;
   for(let i = 0; i < fullPalette.length; i++) {
     for(let j = 0; j < fullPalette[i].length; j++) {
       if(match === fullPalette[i][j]) {
-        correctIndex = i;
+        return JSONPalette[Object.keys(JSONPalette)[i]];
       }
     }
   }
-  return fullPalette[correctIndex];
 }
 
+/**
+ * Helper functions to extract r,g,b components from a hex
+ */
 let getRed = (color) => {
   return (color & 0xffffff) >> 16;
 }
@@ -89,8 +90,5 @@ let hexstrToNum = (input) => {
 export default {
   approximateColor,
   colorDistance,
-  getColorFamily,
-  getRed,
-  getGreen,
-  getBlue
+  getColorFamily
 }
