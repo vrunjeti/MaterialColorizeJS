@@ -1,8 +1,14 @@
 {
   "name": "materialcolorize",
   "version": "1.1.0",
-  "description": "",
+  "description": "A library to find the closest colors on the Google material design color palette",
+  "keywords": ["color", "material design", "material"],
   "main": "lib/index.js",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/vrunjeti/MaterialColorizeJS"
+  },
+  "homepage": "http://hyunbin.me/MaterialColors/",
   "scripts": {
     "build": "babel -d lib/ src/",
     "prepublish": "npm run build",
@@ -14,10 +20,9 @@
     "babelify": "^6.2.0",
     "browserify": "^11.0.1",
     "gulp": "^3.9.0",
-    "vinyl-source-stream": "^1.1.0"
+    "vinyl-source-stream": "^1.1.0",
+    "chai": "^3.2.0"
   },
   "dependencies": {
-    "chai": "^3.2.0",
-    "gulp": "^3.9.0"
   }
 }
