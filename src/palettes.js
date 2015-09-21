@@ -1,7 +1,7 @@
 let Palettes = {
   "redPalette": {
     "50": "FFEBEE",
-    "100": "FFCD02",
+    "100": "FFCDD2",
     "200": "EF9A9A",
     "300": "E57373",
     "400": "EF5350",
@@ -224,7 +224,7 @@ let Palettes = {
     "A700": "FFAB00"
   },
   "orangePalette": {
-    "50": "FFF3E0",
+    "50": "FBE9E7",
     "100": "FFE0B2",
     "200": "FFCC80",
     "300": "FFB74D",
