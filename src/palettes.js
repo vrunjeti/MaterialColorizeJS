@@ -224,7 +224,7 @@ let Palettes = {
     "A700": "FFAB00"
   },
   "orangePalette": {
-    "50": "FBE9E7",
+    "50": "FFF3E0",
     "100": "FFE0B2",
     "200": "FFCC80",
     "300": "FFB74D",
@@ -240,7 +240,7 @@ let Palettes = {
     "A700": "FF6D00"
   },
   "deepOrangePalette": {
-    "50": "FBE9A7",
+    "50": "FBE9E7",
     "100": "FFCCBC",
     "200": "FFAB91",
     "300": "FF8A65",
