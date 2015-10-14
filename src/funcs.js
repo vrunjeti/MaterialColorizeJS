@@ -5,7 +5,7 @@ import { Palettes } from './palettes';
  * @param  {String}  color [the hex value of the color to be materialized]
  * @return {String}        [the hex value of the closest calculated color]
  */
-let approximateColor = (color) => {
+function approximateColor(color) {
   color = hexstrToNum(color);
   if(color === 0xFFFFFF) return "FFFFFF";
   if(color === 0x000000) return "000000";
@@ -30,7 +30,7 @@ let approximateColor = (color) => {
  * @param  {String} color [the hex value of the color to find the family palette of]
  * @return {Object}       [the full material color family palette of the input color]
  */
-let getColorFamily = (color) => {
+function getColorFamily(color) {
   let match = approximateColor(color);
   // Black and White aren't in a palette (per se) but are coupled together
   if(match === '000000' || match === 'FFFFFF') {
@@ -61,7 +61,7 @@ let getColorFamily = (color) => {
  * @param  {String} c2 [second color]
  * @return {Int}       ["distance" between colors]
  */
-let colorDistance = (c1, c2) => {
+function colorDistance(c1, c2) {
   c1 = hexstrToNum(c1);
   c2 = hexstrToNum(c2);
   let red1 = getRed(c1);
@@ -76,15 +76,15 @@ let colorDistance = (c1, c2) => {
 /**
  * Helper functions to extract r,g,b components from a hex
  */
-let getRed = (color) => {
+function getRed(color) {
   return (color & 0xffffff) >> 16;
 }
 
-let getGreen = (color) => {
+function getGreen(color) {
   return (color & 0x00ffff) >> 8;
 }
 
-let getBlue = (color) => {
+function getBlue(color) {
   return (color & 0x0000ff);
 }
 
@@ -93,7 +93,7 @@ let getBlue = (color) => {
  * @param  {String} input [the color to be converted to an int]
  * @return {Int}          [the integer value of the hexstring]
  */
-let hexstrToNum = (input) => {
+function hexstrToNum(input) {
   if(typeof input === 'number') return input;
   return parseInt(input.replace(/^#/, ''), 16);
 }
