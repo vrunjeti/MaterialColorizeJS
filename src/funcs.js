@@ -22,7 +22,7 @@ function approximateColor(color) {
  * @return {Object}       [the full material color family palette of the input color]
  */
 function getColorFamily(color) {
-  let match = approximateColor(color)
+  const match = approximateColor(color)
 
   // Black and White aren't in a palette (per se) but are coupled together
   if (match === '000000' || match === 'FFFFFF') {
@@ -51,12 +51,12 @@ function getColorFamily(color) {
 function colorDistance(c1, c2) {
   c1 = hexstrToNum(c1)
   c2 = hexstrToNum(c2)
-  let red1 = getRed(c1)
-  let red2 = getRed(c2)
-  let rMean = (red1 + red2) >> 1
-  let r = red1 - red2
-  let g = getGreen(c1) - getGreen(c2)
-  let b = getBlue(c1) - getBlue(c2)
+  const red1 = getRed(c1)
+  const red2 = getRed(c2)
+  const rMean = (red1 + red2) >> 1
+  const r = red1 - red2
+  const g = getGreen(c1) - getGreen(c2)
+  const b = getBlue(c1) - getBlue(c2)
   return Math.sqrt((((512+rMean)*r*r)>>8) + 4*g*g + (((767-rMean)*b*b)>>8))
 }
 
