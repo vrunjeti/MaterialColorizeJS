@@ -10,13 +10,10 @@ function approximateColor(color) {
   if (color === 0xFFFFFF) return 'FFFFFF'
   if (color === 0x000000) return '000000'
 
-  const allColors = getAllColors()
-
-  const bestIndex = allColors
-    .map(currColor => colorDistance(color, currColor))
-    .reduce((min, curr, index, arr) => (arr[min] < curr) ? min : index, Infinity)
-
-  return allColors[bestIndex]
+  return getAllColors()
+    .map(currColor => ({ color: currColor, distance: colorDistance(color, currColor) }))
+    .reduce((min, curr) => (curr.distance < min.distance) ? curr : min, {distance: Infinity})
+    .color
 }
 
 /**
