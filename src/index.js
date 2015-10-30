@@ -1,4 +1,4 @@
-import { approximateColor, getColorFamily, colorDistance } from './funcs';
+import { approximateColor, getColorFamily, colorDistance } from './funcs'
 
 export default {
   approximateColor,
