@@ -2,8 +2,8 @@ import { Palettes } from './palettes'
 
 /**
  * Calculates closest material color based on input color
- * @param  {String}  color [the hex value of the color to be materialized]
- * @return {String}        [the hex value of the closest calculated color]
+ * @param  {String} color [the hex value of the color to be materialized]
+ * @return {String}       [the hex value of the closest calculated color]
  */
 function approximateColor(color) {
   color = hexstrToNum(color)
@@ -23,6 +23,7 @@ function approximateColor(color) {
  */
 function getColorFamily(color) {
   let match = approximateColor(color)
+
   // Black and White aren't in a palette (per se) but are coupled together
   if (match === '000000' || match === 'FFFFFF') {
     return {
@@ -30,16 +31,11 @@ function getColorFamily(color) {
       'White': 'FFFFFF'
     }
   }
-  let result
-  Object.keys(Palettes).forEach(palette => {
-    Object.keys(Palettes[palette]).forEach(materialColorWeight => {
-      let currMaterialColor = Palettes[palette][materialColorWeight]
-      if (match === currMaterialColor) {
-        result = Palettes[palette]
-      }
-    })
+
+  return arrayify(Palettes).find(fam => {
+    const family = arrayify(fam)
+    if (family.find(col => col === match)) return family
   })
-  return result
 }
 
 /**
@@ -101,6 +97,15 @@ function getAllColors() {
     })
   })
   return result
+}
+
+/**
+ * Simple conversion of flat object to array
+ * @param  {Object} obj [A flat object]
+ * @return {Array}      [The object converted to an array]
+ */
+function arrayify(obj) {
+  return Object.keys(obj).map(key => obj[key])
 }
 
 export default {
