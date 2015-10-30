@@ -1,6 +1,6 @@
 {
   "name": "materialcolorize",
-  "version": "1.1.6",
+  "version": "1.1.7",
   "description": "A library to find the closest colors on the Google material design color palette",
   "keywords": [
     "color",
