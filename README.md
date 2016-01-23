@@ -1,7 +1,7 @@
 # MaterialColorizeJS
 A library to convert a color to its closest on [Google's Material Design Color Palette](https://www.google.com/design/spec/style/color.html#)
 
-Try the [live demonstration](http://hyunbin.me/MaterialColors/)!
+Try the [live demonstration](http://hyunbinpark.com/MaterialColors/)!
 
 There is a [Java version](https://github.com/hyunbin/MaterialColors/) available too!
 
@@ -38,13 +38,13 @@ This function does not take 3 digit hex values yet, but that feature will be add
 
 ```javascript
     // returns '4CAF50'
-    approximateColor('#4AAA58');
+    approximateColor('#4AAA58')
 
     // returns 'FF5722'
-    approximateColor('F7642A');
+    approximateColor('F7642A')
 
     // returns '80DEEA'
-    approximateColor(0x78E1F6);
+    approximateColor(0x78E1F6)
 ```
 
 =============
@@ -53,7 +53,7 @@ This function does not take 3 digit hex values yet, but that feature will be add
 Pass in a color as a hexstring or hexadecimal number and `getColorFamily` will return the family palette of the input color. The keys represent each color's weight.
 
 ```javascript
-    let greenPalette = getColorFamily('ADCF83');
+    const greenPalette = getColorFamily('ADCF83')
     // greenPalette is:
     {
       '50': 'F1F8E9',
@@ -81,13 +81,13 @@ Calculates the 'distance' between two colors by implementing [this formula](http
 There are limited reasons to use this function alone, but one useful case is deciding whether to use black or white text on a colored background (this is an example that is used for the [demo page](http://hyunbin.me/MaterialColors/) to assign the color of the text over the family palette colors):
 
 ```javascript
-  let displayTextColor = (color) => {
+  function displayTextColor(color) {
     // If the input color (each color in the family palette) is 'closer' to black than it is to white,
     // set the overlying text color to white
-    if(mc.colorDistance(color, '000000') < mc.colorDistance(color, 'FFFFFF')) {
-      return 'FFFFFF';
+    if (colorDistance(color, '000000') < colorDistance(color, 'FFFFFF')) {
+      return 'FFFFFF'
     } else {
-      return '000000';
+      return '000000'
     }
   }
 ```
