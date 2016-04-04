@@ -1,7 +1,7 @@
 # MaterialColorizeJS
 A library to convert a color to its closest on [Google's Material Design Color Palette](https://www.google.com/design/spec/style/color.html#)
 
-Try the [live demonstration](http://hyunbinpark.com/MaterialColors/)!
+Try the [live demonstration](http://varunmunjeti.com/MaterialColorizeJS/)!
 
 There is a [Java version](https://github.com/hyunbin/MaterialColors/) available too!
 
